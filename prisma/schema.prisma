@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +5,25 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model user {
+  id               String             @id(map: "pk_user") @default(uuid()) @db.Uuid
+  email            String
+  name             String
+  notes            String
+  recurringrequest recurringrequest[]
+  onetimerequest   onetimerequest[]
+}
+
+model recurringrequest {
+  userid String @id(map: "pk_recurringrequest") @db.Uuid
+  user   user   @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
+}
+
+model onetimerequest {
+  userid String @db.Uuid
+  user   user   @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
+
+  @@id(fields: [userid], map: "pk_onetimerequest")
 }
