@@ -17,13 +17,32 @@ model user {
 }
 
 model recurringrequest {
-  userid String @id(map: "pk_recurringrequest") @db.Uuid
+  userid String @db.Uuid
+  meal   meal
+  day    day
   user   user   @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
+
+  @@id(map: "pk_recurringrequest", fields: [userid, meal, day])
 }
 
 model onetimerequest {
-  userid String @db.Uuid
-  user   user   @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
+  userid String   @db.Uuid
+  date   DateTime @db.Time()
+  meal   meal
+  user   user     @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
 
-  @@id(fields: [userid], map: "pk_onetimerequest")
+  @@id(map: "pk_onetimerequest", fields: [userid])
+}
+
+enum meal {
+  lunch
+  dinner
+}
+
+enum day {
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
 }
