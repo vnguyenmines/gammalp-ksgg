@@ -3,6 +3,9 @@ import { RecurringRequest } from "@/src/types";
 import getUserSession from "@/src/util/getsession";
 import { NextResponse } from "next/server";
 
+/**
+ * Gets all the users' recurring requessts
+ */
 export async function GET() {
     // Get user's session
     const SESSION = await getUserSession();
