@@ -43,7 +43,7 @@ export default function RecurringForm({ defaultValues }: { defaultValues: IRecur
 
     return (
         <>
-            <Toaster position="bottom-center" />
+            <Toaster position="top-center" />
             <form onSubmit={handleSubmit(formSubmit)}>
                 <table className="border-2">
                     <thead>
