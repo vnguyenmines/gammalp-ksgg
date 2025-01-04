@@ -18,7 +18,7 @@ export default function Page() {
         refetchOnWindowFocus: true,
     });
 
-    const recurringFormDefaultValues = useMemo<IRecurringForm>(() => {
+    const recurringFormDefaultValues = useMemo<IRecurringForm | undefined>(() => {
         if (query.data) {
             let recurringFormFields: IRecurringForm = {
                 monday_lunch: false,
@@ -38,6 +38,9 @@ export default function Page() {
 
             return recurringFormFields;
         }
+        else {
+            return undefined;
+        }
     }, [query.data]);
 
     return (
@@ -45,7 +48,7 @@ export default function Page() {
             <Link href={"/"}>👈 Back home</Link>
             <h1>Recurring food request form</h1>
             {/* Check all of the  */}
-            {(query.isFetching) ? <div>Loading...</div> : <RecurringForm defaultValues={recurringFormDefaultValues} />}
+            {(query.isSuccess && !query.isError && !query.isFetching && recurringFormDefaultValues) ? <RecurringForm defaultValues={recurringFormDefaultValues} /> : <div>Loading...</div>}
         </>
     );
 }
