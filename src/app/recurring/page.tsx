@@ -1,7 +1,10 @@
 // Recurring food request form page
 "use client"
+import { RecurringRequest } from "@/src/types";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios"
 
 type RecurringForm = {
     mondayLunch: boolean,
@@ -18,14 +21,34 @@ type RecurringForm = {
 
 export default function Page() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm<RecurringForm>();
+    const query = useQuery({
+        queryKey: ["get_recurring_requests"],
+        queryFn: async () => {
+            const { data } = await axios.get("/api/recurring");
+            console.log(data);
+            return data;
+        }
+    });
+    const mutation = useMutation({
+        mutationKey: ["post_recurring_requests"],
+        mutationFn: async (updatedRecurring: RecurringRequest) => {
+            const { data } = await axios.post("/api/recurring", updatedRecurring);
+            console.log(data);
+            return data;
+        }
+    });
 
-    const formSubmit: SubmitHandler<RecurringForm> = (data) => console.log(data);
+    const formSubmit: SubmitHandler<RecurringForm> = (data) => {
+        console.log(data);
+        mutation.mutate([]);
+    };
 
     return (
         <>
             <Link href={"/"}>👈 Back home</Link>
             <h1>Recurring food request form</h1>
             Check all of the 
+            {/* {mutationResult && {mutationResult}} */}
             <form onSubmit={handleSubmit(formSubmit)}>
                 <table className="border-2">
                     <thead>
