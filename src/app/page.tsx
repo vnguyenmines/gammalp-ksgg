@@ -1,24 +1,33 @@
-import { signIn } from "@/auth";
-import { useSession } from "next-auth/react";
+import { auth, signIn, signOut } from "@/auth";
 import Link from "next/link";
-import SignInButton from "./components/signinbutton";
-import UserStatus from "./components/userstatus";
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
   return (
     <main>
       <h1 className="text-2xl font-bold font">Food Request Form</h1>
-      <UserStatus /> 
-      <SignInButton />
-      
-      <div>
-        <div>
-          <Link href={"/recurring"}>Recurring Request</Link>
-        </div>
-        <div>
-          <Link href={"/onetime"}>One-Time Request</Link>
-        </div>
-      </div>
+      {(session != null && session.user != undefined) ?
+        <>
+          <div>Logged in as {session.user.name}</div>
+          <form action={async () => {
+            "use server";
+            await signOut();
+          }}>
+              <button type="submit">Sign Out</button>
+          </form>
+          <div>
+            <Link href={"/recurring"} className="block">Recurring Request</Link>
+            <Link href={"/onetime"} className="block">One-Time Request</Link>
+          </div>
+        </>
+        :
+        <form action={async () => {
+          "use server";
+          await signIn("google", { redirectTo: "/" });
+        }}>
+          <button type="submit">Sign In</button>
+        </form>}
     </main>
   );
 }
