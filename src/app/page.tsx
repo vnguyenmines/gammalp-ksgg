@@ -6,7 +6,7 @@ export default async function Home() {
 
   return (
     <main>
-      <h1 className="text-2xl font-bold font">Food Request Form</h1>
+      <h1 className="font-bold">Food Request Form</h1>
       {(session != null && session.user != undefined) ?
         <>
           <div>Logged in as {session.user.name}</div>
