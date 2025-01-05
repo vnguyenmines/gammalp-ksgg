@@ -27,7 +27,7 @@ model recurringrequest {
 
 model onetimerequest {
   userid String   @db.Uuid
-  date   DateTime @db.Time()
+  date   DateTime @db.Timestamp(3)
   meal   meal
   user   user     @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
 

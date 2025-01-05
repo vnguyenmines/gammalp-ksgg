@@ -1,6 +1,6 @@
 export type RecurringRequest = {
     day: "monday" | "tuesday" | "wednesday" | "thursday" | "friday"
-    meal: "lunch" | "dinner"
+    meal: meal
 }[]
 
 export interface IRecurringForm {
@@ -15,3 +15,10 @@ export interface IRecurringForm {
     friday_lunch: boolean,
     friday_dinner: boolean,
 }
+
+export interface OneTimeRequest {
+    date: Date
+    meal: meal
+}
+
+export type meal = "lunch" | "dinner";
