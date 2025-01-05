@@ -27,11 +27,11 @@ model recurringrequest {
 
 model onetimerequest {
   userid String   @db.Uuid
-  date   DateTime @db.Timestamp(3)
+  date   DateTime @db.Date
   meal   meal
   user   user     @relation(map: "fk_userid_users_id", fields: [userid], references: [id])
 
-  @@id(map: "pk_onetimerequest", fields: [userid])
+  @@id(map: "pk_onetimerequest", fields: [userid, date, meal])
 }
 
 enum meal {

@@ -31,7 +31,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                                 notes: "sample note"
                             }
                         });
-                        console.log(`Created new user ${profile.email}: ${profile.name}`);
                     }
                 // Check whether the name matches the one in the database
                 }).then(async (user) => {
