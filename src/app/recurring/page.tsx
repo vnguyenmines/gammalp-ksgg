@@ -19,7 +19,7 @@ export default function Page() {
 
     const recurringFormDefaultValues = useMemo<IRecurringForm | undefined>(() => {
         if (query.data) {
-            let recurringFormFields: IRecurringForm = {
+            const recurringFormFields: IRecurringForm = {
                 monday_lunch: false,
                 monday_dinner: false,
                 tuesday_lunch: false,

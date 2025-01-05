@@ -1,7 +1,7 @@
 import { auth } from "@/auth"
 import { NextRequest, NextResponse } from "next/server";
 
-const publicPages = ["/"];
+// const publicPages = ["/"];
 const protectedPages = ["/recurring", "/onetime"];
 
 export default async function middleware(req: NextRequest) {

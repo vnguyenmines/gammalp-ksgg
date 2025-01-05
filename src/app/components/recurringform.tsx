@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast"
 
 export default function RecurringForm({ defaultValues }: { defaultValues: IRecurringForm }) {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm<IRecurringForm>({
+    const { register, handleSubmit } = useForm<IRecurringForm>({
         defaultValues: defaultValues
     });
     const mutation = useMutation({
