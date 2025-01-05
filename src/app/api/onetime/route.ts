@@ -24,9 +24,11 @@ export async function POST(req: NextRequest) {
     // Verify that a duplicate entry is not in the database
     const ENTRY = await PRISMA.onetimerequest.findUnique({
         where: {
-            userid: USER_ID,
-            date: new Date(PAYLOAD.date),
-            meal: PAYLOAD.meal,
+            userid_date_meal: {
+                userid: USER_ID,
+                date: new Date(PAYLOAD.date),
+                meal: PAYLOAD.meal,
+            }
         },
     });
     if (ENTRY) { return NextResponse.json({ message: `One-time request already submitted for that meal and day` }, { status: 400 }); }
