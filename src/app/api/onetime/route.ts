@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     // Request body
     const PAYLOAD = await req.json() as OneTimeRequest;
+    console.log(PAYLOAD);
     // Get user's session
     const SESSION = await getUserSession();
     if (!SESSION.user || !SESSION.user.email) { return NextResponse.json({ message: "No user info found in session" }, { status: 400 }); }
@@ -24,9 +25,9 @@ export async function POST(req: NextRequest) {
     const ENTRY = await PRISMA.onetimerequest.findUnique({
         where: {
             userid: USER_ID,
-            date: PAYLOAD.date,
+            date: new Date(PAYLOAD.date),
             meal: PAYLOAD.meal,
-        }
+        },
     });
     if (ENTRY) { return NextResponse.json({ message: `One-time request already submitted for that meal and day` }, { status: 400 }); }
     // Create a new one time entry in database

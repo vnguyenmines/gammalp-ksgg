@@ -8,11 +8,11 @@ import { format } from "date-fns"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, } from "@/components/ui/command"
 import { useMutation } from "@tanstack/react-query";
 import { meal, OneTimeRequest } from "@/src/types";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 
 const frameworks = [
     {
@@ -117,7 +117,8 @@ function SelectMeal({ value, setValue }: { value: meal | undefined, setValue: Di
                                     key={framework.value}
                                     value={framework.value}
                                     onSelect={(currentValue) => {
-                                        setValue(currentValue === value ? "" : currentValue)
+                                        // setValue(currentValue === value ? "" : currentValue)
+                                        setValue(currentValue as meal)
                                         setOpen(false)
                                     }}
                                 >
