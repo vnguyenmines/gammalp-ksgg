@@ -12,7 +12,6 @@ export default function Page() {
         queryKey: ["get_recurring_requests"],
         queryFn: async () => {
             const { data } = await axios.get("/api/recurring");
-            console.log(data);
             return data as RecurringRequest;
         },
         refetchOnWindowFocus: true,

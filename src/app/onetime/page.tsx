@@ -31,19 +31,16 @@ export default function Page() {
     const { mutate } = useMutation({
         mutationKey: ["post_one_time_request"],
         mutationFn: async (formInfo: OneTimeRequest) => {
-            console.log(formInfo);
-            const { data, status } = await axios.post("/api/onetime", formInfo);
+            const { data, status } = await axios.post("/api/onetime", formInfo, { validateStatus: () => true });
             if (status != 200) { toast.error(data.message); }
             else { toast.success("Request successfully submitted"); }
         }
     });
-    useEffect(() => console.log(meal), [meal]);
 
     function submitOneTimeForm(event: React.MouseEvent<HTMLElement>) {
         event.preventDefault();
         if (date == undefined || meal == undefined) { toast.error("Please fill out all fields"); }
         else {
-            console.log("submitted");
             mutate({
                 date: date,
                 meal: meal,

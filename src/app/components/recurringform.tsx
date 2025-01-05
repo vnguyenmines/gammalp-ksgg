@@ -14,13 +14,11 @@ export default function RecurringForm({ defaultValues }: { defaultValues: IRecur
         mutationKey: ["post_recurring_requests"],
         mutationFn: async (updatedRecurring: RecurringRequest) => {
             const { data } = await axios.post("/api/recurring", updatedRecurring);
-            console.log(data);
             return data;
         }
     });
 
     const formSubmit: SubmitHandler<IRecurringForm> = (data) => {
-        console.log(data);
         const NEW_RECURRING_REQUEST: RecurringRequest = []
         Object.entries(data).map((value) => {
             const fieldName = value[0];
@@ -30,7 +28,6 @@ export default function RecurringForm({ defaultValues }: { defaultValues: IRecur
                 NEW_RECURRING_REQUEST.push({ day: splitString[0] as "monday" | "tuesday" | "wednesday" | "thursday" | "friday", meal: splitString[1] as "lunch" | "dinner" })
             }
         });
-        console.log(NEW_RECURRING_REQUEST);
 
         mutation.mutate(NEW_RECURRING_REQUEST);
     };
