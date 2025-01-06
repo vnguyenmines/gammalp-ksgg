@@ -12,6 +12,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
 import SelectDate from "../components/datepicker";
+import BackHomeButton from "../components/backhomebutton";
 
 const frameworks = [
     {
@@ -50,7 +51,7 @@ export default function Page() {
     return (
         <>
             <Toaster position="top-center" />
-            <Link href={"/"}>👈 Back home</Link>
+            <BackHomeButton />
             <h1>One-time request form</h1>
             <div className="flex flex-col gap-4">
                 <SelectDate date={date} setDate={setDate} />
