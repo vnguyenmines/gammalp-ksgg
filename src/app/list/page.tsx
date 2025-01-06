@@ -7,7 +7,7 @@ import { useState } from "react";
 
 
 export default function Page() {
-    const [date, updateDate] = useState<Date>(new Date(Date.now()));
+    const [date] = useState<Date>(new Date(Date.now()));
     const { data } = useQuery({
         queryKey: ["get_request_list"],
         queryFn: async () => {
@@ -27,7 +27,7 @@ export default function Page() {
             {data && 
                 <>
                     {data.map(({ user, meal }) => {
-                        return <div>{user.name} - {meal}</div>
+                        return <div key={`${user}_${meal}`}>{user.name} - {meal}</div>
                     })}
                 </>
             }

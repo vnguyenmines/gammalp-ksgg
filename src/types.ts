@@ -7,6 +7,8 @@ export type RecurringRequest = {
 }[]
 
 export interface IRecurringForm {
+    sunday_lunch: boolean,
+    sunday_dinner: boolean,
     monday_lunch: boolean,
     monday_dinner: boolean,
     tuesday_lunch: boolean,
@@ -17,6 +19,8 @@ export interface IRecurringForm {
     thursday_dinner: boolean,
     friday_lunch: boolean,
     friday_dinner: boolean,
+    saturday_lunch: boolean,
+    saturday_dinner: boolean,
 }
 
 export interface OneTimeRequest {
