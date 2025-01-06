@@ -1,6 +1,5 @@
 import PRISMA from "@/prisma";
-import { dayoftheweek, getDayOfWeek, getMonth, IListSimple } from "@/src/types";
-import { error } from "console";
+import { dayoftheweek, getDayOfWeek } from "@/src/types";
 import { NextRequest, NextResponse } from "next/server";
 
 /**

@@ -20,6 +20,8 @@ export default function Page() {
     const recurringFormDefaultValues = useMemo<IRecurringForm | undefined>(() => {
         if (query.data) {
             const recurringFormFields: IRecurringForm = {
+                sunday_lunch: false,
+                sunday_dinner: false,
                 monday_lunch: false,
                 monday_dinner: false,
                 tuesday_lunch: false,
@@ -30,6 +32,8 @@ export default function Page() {
                 thursday_dinner: false,
                 friday_lunch: false,
                 friday_dinner: false,
+                saturday_lunch: false,
+                saturday_dinner: false,
             };
             query.data.forEach(({ day, meal }) => {
                 recurringFormFields[`${day}_${meal}`] = true;
