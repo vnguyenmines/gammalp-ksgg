@@ -15,7 +15,7 @@ export default async function Home() {
               "use server";
               await signOut();
             }}>
-                <button type="submit" className="font-semibold text-blue-600 border-b-2 border-blue-600 pb-0 text-sm">Sign Out</button>
+                <button type="submit" className="font-semibold text-blue-600 border-b-2 border-blue-600 pb-0 text-sm mb-5">Sign Out</button>
             </form>
           </div>
         </div>
