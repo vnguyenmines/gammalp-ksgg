@@ -30,6 +30,7 @@ export default async function Home() {
           <div>
             <Link href={"/recurring"} className="block">Recurring Request</Link>
             <Link href={"/onetime"} className="block">One-Time Request</Link>
+            <Link href={"/list"} className="block">List</Link>
           </div>
         }
     </main>
