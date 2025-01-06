@@ -6,6 +6,7 @@ import axios from "axios"
 import RecurringForm from "../components/recurringform";
 import { IRecurringForm, RecurringRequest } from "@/src/types";
 import { useMemo } from "react";
+import BackHomeButton from "../components/backhomebutton";
 
 export default function Page() {
     const query = useQuery({
@@ -48,7 +49,7 @@ export default function Page() {
 
     return (
         <>
-            <Link href={"/"}>👈 Back home</Link>
+            <BackHomeButton />
             <h1>Recurring food request form</h1>
             {/* Check all of the  */}
             {(query.isSuccess && !query.isError && !query.isFetching && recurringFormDefaultValues) ? <RecurringForm defaultValues={recurringFormDefaultValues} /> : <div>Loading...</div>}

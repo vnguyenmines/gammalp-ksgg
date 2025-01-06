@@ -1,5 +1,7 @@
 import { auth, signIn, signOut } from "@/auth";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth();
@@ -9,7 +11,7 @@ export default async function Home() {
       {(session != null && session.user != undefined) ?
         <div className="flex flex-col">
           <div className="flex flex-row gap-2">
-            <form className="mb-4" action={async () => {
+            <form action={async () => {
               "use server";
               await signOut();
             }}>
@@ -27,12 +29,12 @@ export default async function Home() {
 
         <h1 className="font-bold">Food Request Form</h1>
       {(session != null && session.user != undefined) && 
-          <div>
-            <Link href={"/recurring"} className="block">Recurring Request</Link>
-            <Link href={"/onetime"} className="block">One-Time Request</Link>
-            <Link href={"/list"} className="block">List</Link>
-          </div>
-        }
+        <div className="flex flex-col gap-3 w-min">
+          <Link href={"/recurring"} className={buttonVariants({ variant: "outline" })}>Recurring Request</Link>
+          <Link href={"/onetime"} className={buttonVariants({ variant: "outline" })}>One-Time Request</Link>
+          <Link href={"/list"} className={buttonVariants({ variant: "outline" })}>List</Link>
+        </div>
+      }
     </main>
   );
 }
