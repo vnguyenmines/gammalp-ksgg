@@ -49,7 +49,7 @@ export default function Page() {
     return (
         <>
             <BackHomeButton />
-            <h1>Recurring food request form</h1>
+            <h1>Recurring Lateplate Preferences</h1>
             {/* Check all of the  */}
             {(query.isSuccess && !query.isError && !query.isFetching && recurringFormDefaultValues) ? <RecurringForm defaultValues={recurringFormDefaultValues} /> : <div>Loading...</div>}
         </>

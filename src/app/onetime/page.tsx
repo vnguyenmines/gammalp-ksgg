@@ -51,7 +51,7 @@ export default function Page() {
         <>
             <Toaster position="top-center" />
             <BackHomeButton />
-            <h1>One-time request form</h1>
+            <h1>One-time Lateplate Request Form</h1>
             <div className="flex flex-col gap-4">
                 <DatePicker date={date} setDate={setDate} />
                 <SelectMeal value={meal} setValue={setMeal} />

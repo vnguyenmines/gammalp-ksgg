@@ -15,8 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
     })],
     callbacks: {
-        async signIn({ account, profile }) {
-            if (profile && profile.email && profile.name) {
+        async signIn({ profile }) {
+            if (profile && profile.email && profile.name && profile.email.endsWith("@mines.edu")) {
                 // Ensure the user is created locally in the database
                 await PRISMA.user.findUniqueOrThrow({
                     where: {

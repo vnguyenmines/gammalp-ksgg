@@ -16,7 +16,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body className={`antialiased p-6 overflow-hidden`}>
         <Providers>
           <div>
-            {(session != null && session.user != undefined) ? <span>Logged in as <b>{session.user.name}</b></span> : <span>Currently not logged in. Use the <i>Sign In</i> button to login</span>}
+            {(session != null && session.user != undefined) ? <div>Logged in as <b>{session.user.name}</b></div> : <><div>Currently not logged in. Use the <i>Sign In</i> button to login</div><b>Login with your <i>@mines.edu</i> Google Account</b></>}
           </div>
           {children}
         </Providers>

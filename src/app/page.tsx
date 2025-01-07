@@ -26,7 +26,7 @@ export default async function Home() {
           <button type="submit" className="font-semibold text-blue-600 border-b-2 border-blue-600 pb-0">Sign In</button>
         </form>}
 
-        <h1 className="font-bold">Food Request Form</h1>
+        <h1 className="font-bold">Lateplates - Spring 2025</h1>
       {(session != null && session.user != undefined) && 
         <div className="flex flex-col gap-3 w-min">
           <Link href={"/recurring"} className={buttonVariants({ variant: "outline" })}>Recurring Request</Link>
