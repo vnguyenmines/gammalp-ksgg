@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 
-export default function SelectDate({ date, setDate }: { date: Date | undefined, setDate: Dispatch<SetStateAction<Date | undefined>> }) {
+export default function DatePicker({ date, setDate }: { date: Date | undefined, setDate: Dispatch<SetStateAction<Date | undefined>> }) {
     return (
         <Popover>
             <PopoverTrigger asChild>
