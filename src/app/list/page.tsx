@@ -2,7 +2,7 @@
 import { getDayOfWeek, getMonth, IListSimple } from "@/src/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import BackHomeButton from "../components/backhomebutton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
@@ -41,19 +41,19 @@ export default function Page() {
                         {/* Lunch */}
                         <div>
                             <h3>Lunch</h3>
-                            <Table>
+                            <Table className="overflow-x-scroll">
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[100px]">Name</TableHead>
-                                        <TableHead className="text-right">Meal</TableHead>
+                                        <TableHead className="w-min">Name</TableHead>
+                                        <TableHead className="text-left">Meal</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {list.filter((value) => value.meal === "lunch").map(({ user, meal }) => (
-                                        <>
+                                        <TableRow key={`${user.name}_${meal}`}>
                                             <TableCell key={`${user.name}_${meal}_name`}>{user.name}</TableCell>
                                             <TableCell key={`${user.name}_${meal}_meal`}>{meal}</TableCell>
-                                        </>
+                                        </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
@@ -61,13 +61,19 @@ export default function Page() {
                         {/* Dinner */}
                         <div>
                             <h3>Dinner</h3>
-                            <Table>
+                            <Table className="overflow-x-scroll">
+                                <TableHeader>
+                                    <TableRow>
+                                        <TableHead className="w-min">Name</TableHead>
+                                        <TableHead className="text-left">Meal</TableHead>
+                                    </TableRow>
+                                </TableHeader>
                                 <TableBody>
                                     {list.filter((value) => value.meal === "dinner").map(({ user, meal }) => (
-                                        <>
+                                        <TableRow key={`${user.name}_${meal}`}>
                                             <TableCell key={`${user.name}_${meal}_name`}>{user.name}</TableCell>
                                             <TableCell key={`${user.name}_${meal}_meal`}>{meal}</TableCell>
-                                        </>
+                                        </TableRow>
                                     ))}
                                 </TableBody>
                             </Table>
