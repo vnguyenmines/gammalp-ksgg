@@ -4,9 +4,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast"
+import "../globals.css";
+import { Button } from "@/components/ui/button";
 
 export default function RecurringForm({ defaultValues }: { defaultValues: IRecurringForm }) {
-
     const { register, handleSubmit } = useForm<IRecurringForm>({
         defaultValues: defaultValues
     });
@@ -32,53 +33,55 @@ export default function RecurringForm({ defaultValues }: { defaultValues: IRecur
         mutation.mutate(NEW_RECURRING_REQUEST);
     };
 
-        useEffect(() => {
-            toast.dismiss();
-            if (mutation.isPending) { toast.loading("Saving changes"); }
-            if (mutation.isSuccess) { toast.success("Saved preferences"); }
-        }, [mutation.isPending, mutation.isSuccess]);
+    useEffect(() => {
+        toast.dismiss();
+        if (mutation.isPending) { toast.loading("Saving changes"); }
+        if (mutation.isSuccess) { toast.success("Saved preferences"); }
+    }, [mutation.isPending, mutation.isSuccess]);
+
+    const CELL_BODY_STYLE = "text-left px-4 py-2";
 
     return (
         <>
             <Toaster position="top-center" />
             <form onSubmit={handleSubmit(formSubmit)}>
-                <table className="border-2">
+                <table id="recurring-form" className="border-2">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Lunch</th>
-                            <th>Dinner</th>
+                            <th className={`${CELL_BODY_STYLE}`}></th>
+                            <th className={`${CELL_BODY_STYLE}`}>Lunch</th>
+                            <th className={`${CELL_BODY_STYLE}`}>Dinner</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th>Monday</th>
-                            <td><input type="checkbox" defaultChecked={false} {...register("monday_lunch")} /></td>
-                            <td><input type="checkbox" defaultChecked={false} {...register("monday_dinner")} /></td>
+                            <th className={`${CELL_BODY_STYLE}`}>Monday</th>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("monday_lunch")} /></td>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("monday_dinner")} /></td>
                         </tr>
                         <tr>
-                            <th>Tuesday</th>
-                            <td><input type="checkbox" defaultChecked={false} {...register("tuesday_lunch")} /></td>
-                            <td><input type="checkbox" defaultChecked={false} {...register("tuesday_dinner")} /></td>
+                            <th className={`${CELL_BODY_STYLE}`}>Tuesday</th>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("tuesday_lunch")} /></td>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("tuesday_dinner")} /></td>
                         </tr>
                         <tr>
-                            <th>Wednesday</th>
-                            <td><input type="checkbox" defaultChecked={false} {...register("wednesday_lunch")} /></td>
-                            <td><input type="checkbox" defaultChecked={false} {...register("wednesday_dinner")} /></td>
+                            <th className={`${CELL_BODY_STYLE}`}>Wednesday</th>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("wednesday_lunch")} /></td>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("wednesday_dinner")} /></td>
                         </tr>
                         <tr>
-                            <th>Thursday</th>
-                            <td><input type="checkbox" defaultChecked={false} {...register("thursday_lunch")} /></td>
-                            <td><input type="checkbox" defaultChecked={false} {...register("thursday_dinner")} /></td>
+                            <th className={`${CELL_BODY_STYLE}`}>Thursday</th>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("thursday_lunch")} /></td>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("thursday_dinner")} /></td>
                         </tr>
                         <tr>
-                            <th>Friday</th>
-                            <td><input type="checkbox" defaultChecked={false} {...register("friday_lunch")} /></td>
-                            <td><input type="checkbox" defaultChecked={false} {...register("friday_dinner")} /></td>
+                            <th className={`${CELL_BODY_STYLE}`}>Friday</th>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("friday_lunch")} /></td>
+                            <td className={`${CELL_BODY_STYLE}`}><input type="checkbox" defaultChecked={false} {...register("friday_dinner")} /></td>
                         </tr>
                     </tbody>
                 </table>
-                <button type="submit">Save changes</button>
+                <Button className="mt-5" type="submit">Save changes</Button>
             </form>
         </>
     );
