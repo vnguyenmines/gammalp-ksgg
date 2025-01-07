@@ -10,7 +10,7 @@ import { meal, OneTimeRequest } from "@/src/types";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";
-import SelectDate from "../components/datepicker";
+import DatePicker from "../components/datepicker";
 import BackHomeButton from "../components/backhomebutton";
 
 const frameworks = [
@@ -53,7 +53,7 @@ export default function Page() {
             <BackHomeButton />
             <h1>One-time request form</h1>
             <div className="flex flex-col gap-4">
-                <SelectDate date={date} setDate={setDate} />
+                <DatePicker date={date} setDate={setDate} />
                 <SelectMeal value={meal} setValue={setMeal} />
                 <Button className="w-min" onClick={submitOneTimeForm}>Submit</Button>
             </div>
