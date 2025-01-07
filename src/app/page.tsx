@@ -1,7 +1,6 @@
 import { auth, signIn, signOut } from "@/auth";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth();

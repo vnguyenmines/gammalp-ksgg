@@ -1,7 +1,6 @@
 // Recurring food request form page
 "use client"
 import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 import axios from "axios"
 import RecurringForm from "../components/recurringform";
 import { IRecurringForm, RecurringRequest } from "@/src/types";
