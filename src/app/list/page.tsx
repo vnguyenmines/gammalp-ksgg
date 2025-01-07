@@ -15,23 +15,18 @@ export default function Page() {
             const CURRENT_TIME = Date.now();
             // const CURRENT_TIME = 1736180000000;
             const { data: queryResult} = await axios.get(`/api/list?time=${CURRENT_TIME}`);
-            // console.log(queryResult["data"]);
             return queryResult["data"] as IListSimple;
         }
     });
 
     const list = useMemo(() => {
         if (data) {
-            // console.log(data);
-            // console.log(data.filter((obj, index, self) => index === self.findIndex((other) => (other.user.name === obj.user.name && other.meal == obj.meal))));
             return data.filter((obj, index, self) => index === self.findIndex((other) => (other.user.name === obj.user.name && other.meal == obj.meal)));
         }
         else {
             return [];
         }
     }, [data]);
-
-    // useEffect(() => {console.log(list)}, [list]);
 
     return (
         <>
@@ -40,15 +35,24 @@ export default function Page() {
                 <h2 className="mt-3 font-bold text-l">Request List</h2>
                 <h1>{getDayOfWeek(date.getDay())}, {getMonth(date.getMonth())} {date.getDate()} {date.getFullYear()}</h1>
                 { isLoading && <div>Loading...</div> }
-                {/* Lunch */}
-                {list && 
-                    <>
-                        {list.map(({ user, meal }) => {
-                            return <div key={`${user}_${meal}`}>{user.name} - {meal}</div>
-                        })}
-                    </>
+                {list &&
+                    <div className="flex flex-col gap-3">
+                        {/* Lunch */}
+                        <div>
+                            <h3>Lunch</h3>
+                            {list.filter((value) => value.meal === "lunch").map(({ user, meal }) => {
+                                return <div key={`${user}_${meal}`}>{user.name} - {meal}</div>
+                            })}
+                        </div>
+                        {/* Dinner */}
+                        <div>
+                            <h3>Dinner</h3>
+                            {list.filter((value) => value.meal === "dinner").map(({ user, meal }) => {
+                                return <div key={`${user}_${meal}`}>{user.name} - {meal}</div>
+                            })}
+                        </div>
+                    </div>
                 }
-                {/* Dinner */}
             </div>
         </>
     );
