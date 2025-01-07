@@ -1,5 +1,5 @@
 "use client"
-import { getDayOfWeek, getMonth, IListSimple } from "@/src/types";
+import { IListSimple } from "@/src/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
@@ -33,7 +33,7 @@ export default function Page() {
     // Date changed
     useEffect(() => {
         refetch()
-    }, [date]);
+    }, [date, refetch]);
 
     return (
         <>
