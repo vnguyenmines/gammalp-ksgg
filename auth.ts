@@ -16,7 +16,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     })],
     callbacks: {
         async signIn({ profile }) {
+            console.log(`User ${profile?.name}/${profile?.email} is requesting authentication`);
             if (profile && profile.email && profile.name && profile.email.endsWith("@mines.edu")) {
+                console.log(`User ${profile.email} passed email restriction`);
                 // Ensure the user is created locally in the database
                 await PRISMA.user.findUniqueOrThrow({
                     where: {
@@ -24,6 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     }
                 }).catch(async (err) => {
                     if (err.code == "P2025" && profile.email && profile.name) {
+                        console.log(`User ${profile.email} does not exist in the database. Creating a new user...`);
                         await PRISMA.user.create({
                             data: {
                                 email: profile.email,
@@ -34,7 +37,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     }
                 // Check whether the name matches the one in the database
                 }).then(async (user) => {
-                    if (user && user.name != profile.name && profile.name && profile.email) {
+                    // Check if there are any updates to data
+                    if (user && profile.name && profile.email && user.name != profile.name) {
+                        console.log(`User ${profile.email} name changed.`);
                         await PRISMA.user.update({
                             data: {
                                 name: profile.name
@@ -44,15 +49,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                             }
                         });
                     }
-                    else if (user) { return; }
-                    else {
-                        throw Error(`Finding user ${profile.email} broke through Prisma error handling. User value: ${JSON.stringify(user)}`);
-                    }
+                    // else if (user) { return; }
+                    // else {
+                    //     throw Error(`Finding user ${profile.email} broke through Prisma error handling. User value: ${JSON.stringify(user)}`);
+                    // }
                 });
 
                 return true;
             }
             else {
+                console.log(`User ${profile?.email} failed to meet the email restriction`);
                 return false;
             }
         },
