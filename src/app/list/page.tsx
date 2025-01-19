@@ -1,6 +1,6 @@
 "use client"
 import { IListSimple } from "@/src/types";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import BackHomeButton from "../components/backhomebutton";
@@ -10,9 +10,10 @@ import DatePicker from "../components/datepicker";
 
 
 export default function Page() {
+    const queryClient = useQueryClient();
     const [date, updateDate] = useState<Date | undefined>(new Date(Date.now()));
     const { data, isLoading, refetch } = useQuery({
-        queryKey: ["get_request_list", date],
+        queryKey: ["get_request_list"],
         queryFn: async () => {
             if (!date) { throw Error("No date provided") }
             const { data: queryResult } = await axios.get(`/api/list?time=${date.getTime()}`);
@@ -32,7 +33,8 @@ export default function Page() {
 
     // Date changed
     useEffect(() => {
-        refetch()
+        queryClient.cancelQueries({ queryKey: ["get_request_list"] })
+        refetch();
     }, [date, refetch]);
 
     return (

@@ -31,10 +31,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                                 notes: "sample note"
                             }
                         });
+                        console.log(`User ${profile.email} does not exist in the database. Creating a new user for ${profile.name}.`);
                     }
                 // Check whether the name matches the one in the database
                 }).then(async (user) => {
-                    if (user && user.name != profile.name && profile.name && profile.email) {
+                    // Check if there are any updates to data
+                    if (user && profile.name && profile.email && user.name != profile.name) {
                         await PRISMA.user.update({
                             data: {
                                 name: profile.name
@@ -43,16 +45,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                                 email: profile.email
                             }
                         });
-                    }
-                    else if (user) { return; }
-                    else {
-                        throw Error(`Finding user ${profile.email} broke through Prisma error handling. User value: ${JSON.stringify(user)}`);
+                        console.log(`User ${profile.email} name changed.`);
                     }
                 });
 
                 return true;
             }
             else {
+                console.log(`User ${profile?.email} failed to meet the email restriction`);
                 return false;
             }
         },
