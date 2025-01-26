@@ -1,5 +1,5 @@
 import PRISMA from "@/prisma";
-import { dayoftheweek, getDayOfWeek } from "@/src/types";
+import { dayoftheweek, getDayOfWeek } from "@/types";
 import { NextRequest, NextResponse } from "next/server";
 
 /**

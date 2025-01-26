@@ -1,6 +1,6 @@
 import PRISMA from "@/prisma";
-import { RecurringRequest } from "@/src/types";
-import getUserSession from "@/src/util/getsession";
+import { RecurringRequest } from "@/types";
+import getUserSession from "@/util/getsession";
 import { NextResponse } from "next/server";
 
 /**
