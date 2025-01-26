@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./providers";
-import { auth } from "@/auth";
+import { auth } from "/auth";
 
 export const metadata: Metadata = {
   title: "Food Request Form",

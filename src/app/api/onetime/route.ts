@@ -1,6 +1,6 @@
 import PRISMA from "@/prisma";
-import { OneTimeRequest } from "@/src/types";
-import getUserSession from "@/src/util/getsession";
+import { OneTimeRequest } from "@/types";
+import getUserSession from "@/util/getsession";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {

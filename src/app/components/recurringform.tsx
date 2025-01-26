@@ -1,4 +1,4 @@
-import { IRecurringForm, RecurringRequest } from "@/src/types";
+import { IRecurringForm, RecurringRequest } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect } from "react";

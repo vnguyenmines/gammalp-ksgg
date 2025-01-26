@@ -6,7 +6,7 @@ import { Check, ChevronsUpDown } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { useMutation } from "@tanstack/react-query";
-import { meal, OneTimeRequest } from "@/src/types";
+import { meal, OneTimeRequest } from "@/types";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import { Command, CommandEmpty, CommandGroup, CommandItem, CommandList } from "@/components/ui/command";

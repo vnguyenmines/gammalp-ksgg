@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios"
 import RecurringForm from "../components/recurringform";
-import { IRecurringForm, RecurringRequest } from "@/src/types";
+import { IRecurringForm, RecurringRequest } from "@/types";
 import { useMemo } from "react";
 import BackHomeButton from "../components/backhomebutton";
 

@@ -1,4 +1,4 @@
-import { auth } from "@/auth"
+import { auth } from "/auth"
 import { NextRequest, NextResponse } from "next/server";
 
 // const publicPages = ["/"];

@@ -1,13 +1,11 @@
 "use client"
-import { IListSimple } from "@/src/types";
+import { IListSimple } from "@/types";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import BackHomeButton from "../components/backhomebutton";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import DatePicker from "../components/datepicker";
-
-
 
 export default function Page() {
     const queryClient = useQueryClient();
@@ -35,7 +33,7 @@ export default function Page() {
     useEffect(() => {
         queryClient.cancelQueries({ queryKey: ["get_request_list"] })
         refetch();
-    }, [date, refetch]);
+    }, [queryClient, date, refetch]);
 
     return (
         <>
