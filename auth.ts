@@ -15,8 +15,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
     })],
     callbacks: {
-        async signIn({ account, profile }) {
-            if (profile && profile.email && profile.name) {
+        async signIn({ profile }) {
+            console.log(`User ${profile?.name}/${profile?.email} is requesting authentication`);
+            if (profile && profile.email && profile.name && profile.email.endsWith("@mines.edu")) {
+                console.log(`User ${profile.email} passed email restriction`);
                 // Ensure the user is created locally in the database
                 await PRISMA.user.findUniqueOrThrow({
                     where: {
@@ -24,6 +26,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     }
                 }).catch(async (err) => {
                     if (err.code == "P2025" && profile.email && profile.name) {
+                        console.log(`User ${profile.email} does not exist in the database. Creating a new user...`);
                         await PRISMA.user.create({
                             data: {
                                 email: profile.email,
@@ -31,12 +34,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                                 notes: "sample note"
                             }
                         });
-                        console.log(`User ${profile.email} does not exist in the database. Creating a new user for ${profile.name}.`);
                     }
                 // Check whether the name matches the one in the database
                 }).then(async (user) => {
                     // Check if there are any updates to data
                     if (user && profile.name && profile.email && user.name != profile.name) {
+                        console.log(`User ${profile.email} name changed.`);
                         await PRISMA.user.update({
                             data: {
                                 name: profile.name
@@ -45,7 +48,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                                 email: profile.email
                             }
                         });
-                        console.log(`User ${profile.email} name changed.`);
                     }
                 });
 
